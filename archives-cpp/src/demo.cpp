@@ -567,6 +567,11 @@ struct Node3{
 	int i1;
 };
 
+//函数指针 <==> pam[][25]
+void funcPtrPam(int(*pam)[25]) {
+
+}
+
 //2018-7-8 短学期
 void memoryTest(){
 	printf("%d\n", sizeof(Node1));
@@ -574,6 +579,19 @@ void memoryTest(){
 	printf("%d\n", sizeof(Node2_1));
 	printf("%d\n", sizeof(Node3));
 	printf("\n");
+}
+
+void FreeAndDeleteDemo() {
+	int *temptr = nullptr;
+	//这种意义下两者等价
+	temptr = NULL;
+	// 由于是null 被重复释放 甚至 delete free混用都没问题(但不要混用)
+	delete temptr;
+	delete temptr;
+	//delete nullptr; // 报错
+	free(temptr);
+	free(NULL);
+	free(nullptr);
 }
 
 int main(){
@@ -692,3 +710,5 @@ set的各成员函数列表如下:
 
 19. value_comp()--返回一个用于比较元素间的值的函数
 */
+
+//各种类型转为字符串: https://blog.csdn.net/chavo0/article/details/51038397
