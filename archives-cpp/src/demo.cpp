@@ -594,6 +594,27 @@ void FreeAndDeleteDemo() {
 	free(nullptr);
 }
 
+void mainForStreamDemo() {
+	// 正斜杠(撇杠 forward slash'/') 除法符号, 间隔符号, unix系统中表示目录, 网址(URL)目录(web遵循unix命名)
+	// 反斜杠(捺杠 back slash'\') windows系统中表示目录
+	ifstream input("res/input");
+	ofstream output("res/output");
+	//ifstream input("input");		  // 访问项目根目录下的文件
+	//ofstream output("output");
+	//ofstream output("res/output");  // 0.在src目录下的output文件
+	//ofstream output("res//output"); // 1.等价于0
+	//ofstream output("res\output");  // 2.转义o 无效 在项目根目录下新建 srcoutput 文件
+	//ofstream output("res\\output"); // 3.等价于0
+
+	int n;
+	input >> n;
+	output << n << endl;
+
+	input.close();
+	output.close();
+}
+
+
 int main(){
 	/*
 	内存泄漏检测while(true){x = new X(); delete x;}
