@@ -615,6 +615,52 @@ void mainForStreamDemo() {
 }
 
 
+
+using ticket = int;
+class VirtualTable {  // example class  
+public:
+	virtual void VirtualFunction01(ticket);
+};
+
+void VirtualTable::VirtualFunction01(ticket) {
+	printf("VirtualFunction01 called");
+}
+
+typedef void(__thiscall* VirtualFunction01_t)(ticket* thisptr);
+VirtualFunction01_t g_org_VirtualFunction01;
+
+//our detour function  
+void __fastcall hk_VirtualFunction01(ticket* thisptr, int edx) {
+	printf("Custom function called");
+	//call the original function  
+	g_org_VirtualFunction01(thisptr);
+}
+int _tmain(int argc, TCHAR* argv[]) {
+
+	DWORD oldProtection;
+	//https://zh.wikipedia.org/wiki/%E9%92%A9%E5%AD%90%E7%BC%96%E7%A8%8B
+	VirtualTable* myTable = new VirtualTable();
+	void** base = *(void***)myTable;
+	//处理被拦截的函数调用、事件、消息的代码，被称为钩子（hook）。
+	//C++使用虚函数，因此可在运行时直接修改虚函数表的内容来挂钩。
+	VirtualProtect(&base[0], 4, PAGE_EXECUTE_READWRITE, &oldProtection);
+	//save the original function  
+	g_org_VirtualFunction01 = (VirtualFunction01_t)base[0];
+	//overwrite  
+	base[0] = &hk_VirtualFunction01;
+	VirtualProtect(&base[0], 4, oldProtection, 0);
+
+	//call the virtual function (now hooked) from our class instance  
+	myTable->VirtualFunction01(10);
+
+	return 0;
+}
+
+int mainForVirtualProtect(){
+	//虚函数拦截
+	_tmain(0, nullptr);
+}
+
 int main(){
 	/*
 	内存泄漏检测while(true){x = new X(); delete x;}
