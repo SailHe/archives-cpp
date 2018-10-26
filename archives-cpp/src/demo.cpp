@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <graphics.h>
 #include <conio.h>//getch//
 #include <time.h>
 #include<cstring>//memset//
@@ -242,6 +241,8 @@ private:
 		return new int(rand() % 100);
 	}
 };
+
+
 template <typename T>
 class A{
 public:
@@ -252,6 +253,7 @@ public:
 		cout << "A=0" << endl;
 	}
 };
+
 template <typename T>
 class B : public A<T>{
 public:
@@ -262,13 +264,15 @@ public:
 		cout << "B!=0" << endl;
 	}
 };
-struct d{
+
+struct Dclass{
 	int *a;
-	d(){
+	Dclass(){
 		a = new int();
 	}
 };
-int main_1(){
+
+int mainForVirtualFunction(){
 	A<int>* pp = new B<int>;pp->f1();//输出B is called,虚函数成功
 	ActionMap a;
 	a.run();
@@ -296,6 +300,8 @@ int main_1(){
 	ptr_to_func signal2(int, ptr_to_func);
 	return 0;
 }
+
+
 class Base {
 public:
 	void menfcn() {
@@ -310,14 +316,16 @@ public:
 
 class Derived : public Base {
 public:
-	using Base::menfcn;  //using声明只能指定一个名字，不能带形参表
+	//using声明只能指定一个名字，不能带形参表
+	using Base::menfcn;
 	int menfcn(int R, int C) {
 		cout << "Derived function with int" << endl;
 		return R;
 	}
 };
 
-int main_2() {
+//导出
+int mainForDerived() {
 	Base b;
 	Derived d;
 	b.menfcn();
@@ -330,10 +338,10 @@ int main_2() {
 	return 0;
 }
 
-#include"E:\Projects\myLib\TreeObject.h"
+
 
 /*两个循环一条语句和一个循环两条语句有区别吗*/
-int main_3(){
+int mainForStdSearch(){
 	freopen("input", "r", stdin);
 	int n, m;
 	while (~scanf("%d%d", &n, &m)){
@@ -341,7 +349,6 @@ int main_3(){
 		vector<T> total;
 		srand(0);
 		for (int i = 0; i < 10000000; ++i){
-			Olympic();
 			total.push_back(i + rand());
 			deque<int>;//双端队列
 			queue<int>;//队列
@@ -370,59 +377,7 @@ int main_3(){
 		return 0;
 	}
 }
-int main_4(){
-	freopen("input", "r", stdin);
-	int n;//考点数 树
-	srand(0);
-	while (true){
-		//scanf("%d", &n);
-		n = rand() % 10000;
-		using T = Student;
-		PtrArray<AvlTree<T>> data = PtrArray<AvlTree<T>>(n);//n个考场
-		vector<T> total;
-		T in;
-		for (int t = 0; t < n; ++t){
-			int k;
-			//scanf("%d", &k);
-			k = rand() % 100;
-			in.place = t + 1;
-			for (int i = 0; i < k; ++i){
-				//scanf("%s%d", &in.id, &in.score);
-				in.id[0] = char(rand() % 'Z' + 'A');
-				in.score = rand() % 100;
-				data[t]->insert(in);
-			}//O(N*K*logK)
-			int pastId = 0;
-			int reCnt = 0;//当前元素现在的重复个数
-			AvlTree<T>::Position pastP = NULL;
-			data[t]->traversal(Tree::RE_ORDER, [&](AvlTree<T>::Position bt){
-				if (pastP != NULL && pastP->Data.score == bt->Data.score)
-					++reCnt;
-				else
-					reCnt = 0;
-				bt->Data.rank = ++pastId - reCnt;//等级 = 序号 - 重复个数
-				total.push_back(bt->Data);
-				pastP = bt;
-				return false;
-			});//O(N*K*logK)
-		}
-		sort(total.begin(), total.end());//O(log(N*K))
-		int len = total.size();
-		printf("%d\n", len);
-		int pastId = 0;
-		int reCnt = 0;//当前元素现在的重复个数
-		for (int i = len - 1; i >= 0; --i){
-			if (i != len - 1 && total[i + 1].score == total[i].score)
-				++reCnt;
-			else
-				reCnt = 0;
-			total[i].localRank = total[i].rank;//本地排名
-			total[i].rank = ++pastId - reCnt;//总排名
-			total[i].outPut();
-		}//O(N*K)
-	}
-	return 0;
-}
+
 
 int minCmp(int const &min, int const &max){
 	return min - max;
@@ -567,19 +522,21 @@ struct Node3{
 	int i1;
 };
 
-//函数指针 <==> pam[][25]
-void funcPtrPam(int(*pam)[25]) {
-
-}
-
 //2018-7-8 短学期
-void memoryTest(){
+void mainForMemoryTest(){
 	printf("%d\n", sizeof(Node1));
 	printf("%d\n", sizeof(Node2));
 	printf("%d\n", sizeof(Node2_1));
 	printf("%d\n", sizeof(Node3));
 	printf("\n");
 }
+
+//函数指针 <==> pam[][25]
+void funcPtrPam(int(*pam)[25]) {
+
+}
+
+
 
 void FreeAndDeleteDemo() {
 	int *temptr = nullptr;
@@ -593,6 +550,8 @@ void FreeAndDeleteDemo() {
 	free(NULL);
 	free(nullptr);
 }
+
+
 
 void mainForStreamDemo() {
 	// 正斜杠(撇杠 forward slash'/') 除法符号, 间隔符号, unix系统中表示目录, 网址(URL)目录(web遵循unix命名)
@@ -678,9 +637,11 @@ int main(){
 	auto pA = new A1Class(10);
 	auto pA2_1 = new A2Class(10);
 	auto pA2 = fun(pA, new A1Class(100));
-	int type = pA2_1->willPolymorphism(A2Class(100));
+	auto tempA2Class = A2Class(100);
+	int type = pA2_1->willPolymorphism(tempA2Class);
 	shared_ptr<virParent> v = shared_ptr<virChild>(new virChild());
-	v->test(virChild());
+	auto tempvirChild = virChild();
+	v->test(tempvirChild);
 	pA2.reset();/**/
 	/****多态展示****/
 	A1Class *ab1 = new A2Class(1);
