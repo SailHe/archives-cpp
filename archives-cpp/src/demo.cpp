@@ -87,6 +87,52 @@ list<IndexEdgeNode>::const_iterator//用常量迭代器遍历邻接表
 dubug时的界限检查release时应该取消
 调用虚函数开销极大 在递归函数中存在此类调用时可以考虑换实现了 但是编译器有优化...
 */
+
+
+/*
+set的各成员函数列表如下:
+
+1. begin()--返回指向第一个元素的迭代器
+
+2. clear()--清除所有元素
+
+3. count()--返回某个值元素的个数
+
+4. empty()--如果集合为空，返回true
+
+5. end()--返回指向最后一个元素的迭代器
+
+6. equal_range()--返回集合中与给定值相等的上下限的两个迭代器
+
+7. erase()--删除集合中的元素
+
+8. find()--返回一个指向被查找到元素的迭代器
+
+9. get_allocator()--返回集合的分配器
+
+10. insert()--在集合中插入元素
+
+11. lower_bound()--返回指向大于（或等于）某值的第一个元素的迭代器
+
+12. key_comp()--返回一个用于元素间值比较的函数
+
+13. max_size()--返回集合能容纳的元素的最大限值
+
+14. rbegin()--返回指向集合中最后一个元素的反向迭代器
+
+15. rend()--返回指向集合中第一个元素的反向迭代器
+
+16. size()--集合中元素的数目
+
+17. swap()--交换两个集合变量
+
+18. upper_bound()--返回大于某个值元素的迭代器
+
+19. value_comp()--返回一个用于比较元素间的值的函数
+*/
+
+//各种类型转为字符串: https://blog.csdn.net/chavo0/article/details/51038397
+
 #define infinity 2147483647
 #define N 100000+5
 using namespace std;
@@ -379,33 +425,6 @@ int mainForStdSearch(){
 }
 
 
-int minCmp(int const &min, int const &max){
-	return min - max;
-}
-
-int maxCmp(int const &min, int const &max){
-	return -minCmp(min, max);
-}
-
-template<class T>
-void shellSort(T a[], int n){
-	int si;
-	int sedgewick[] = { 929, 505, 109, 41, 19, 5, 1, 0 };
-	for (si = 0; sedgewick[si] >= n; ++si);//找到第一个小于排序元素个数的增量
-
-	for (int d = sedgewick[si]; d > 0; d = sedgewick[++si]){
-		/*插入排序*/
-		for (int p = d, i; p < n; ++p){
-			T tmp = a[p];
-			for (i = p; i >= d && a[i - d] > tmp; i -= d){
-				a[i] = a[i - d];//i属于[d, p], 将前面"大于"a[p]的值后移
-			}
-			//a[i - d] <= tmp时 因为前面都是局部有序的 [0, i-d]区间内的值 <= a[p]一定成立, (i, p]内的值>a[p]一定成立
-			a[i] = tmp;//于是i就是a[p]的位置 ps这句放里面也行 只是会多做几次无用的交换
-		}
-	}
-}
-
 class virParent{
 public:
 	virtual void test(virParent &rhs) = 0;
@@ -653,39 +672,8 @@ int main(){
 	opp(&b, &a);
 	re = a < b;
 	//	re = b < a;
-	/***********/
-
-	/*int aa[] = { 44, 12, 59, 36, 62, 43, 94, 7, 35, 52, 85 };
-	shellSort<int>(aa, 11);
-	char post[10] = "hfbdcea";
-	char in[10] = "hbfadec";
-	char pre[10] = "";
-	BinTree<char> tt;
-	tt.orderTranslation(pre, nullptr, in, post, 7);
-	vector<int> a = { 6, 15, 3, 9, 7, 4, 12, 10, 15, 14, 5, 13 };
-	int b[10] = { 2, 1, 4, 5, 9, 3, 6, 7 };
-	AvlTree<int> t = AvlTree<int>();
-	for (int i = 0; i < 8; ++i){
-	t.insert(b[i]);
-	}
-	Heap<int> h = Heap<int>(a.size() + 5);
-	h.build(-1, maxCmp);
-	for (int i = 0; i < a.size(); ++i)
-	h.push(a[i]);
-	h.pop();
-	h.pop();
-	h.pop();
-	h.push(8);
-	h.push(11);
-	puts("");
-	h.traversal(h.level, [&](BinTree<int>::BT b){
-	printf("%d ", b->Data);
-	return false;
-	});*/
 	return 0;
 }
-
-
 
 /*void setCustomVisitFun(void(*customVisitFun)(int r, int c)){
 customVisit = customVisitFun;
@@ -695,48 +683,3 @@ void setCustomVisitFun(Fun &customVisitFun){
 	customVisit = customVisitFun;
 }
 void(*customVisit)(int r, int c) = [](int r, int c){};//nullptr自定义访问
-
-
-/*
-set的各成员函数列表如下:
-
-1. begin()--返回指向第一个元素的迭代器
-
-2. clear()--清除所有元素
-
-3. count()--返回某个值元素的个数
-
-4. empty()--如果集合为空，返回true
-
-5. end()--返回指向最后一个元素的迭代器
-
-6. equal_range()--返回集合中与给定值相等的上下限的两个迭代器
-
-7. erase()--删除集合中的元素
-
-8. find()--返回一个指向被查找到元素的迭代器
-
-9. get_allocator()--返回集合的分配器
-
-10. insert()--在集合中插入元素
-
-11. lower_bound()--返回指向大于（或等于）某值的第一个元素的迭代器
-
-12. key_comp()--返回一个用于元素间值比较的函数
-
-13. max_size()--返回集合能容纳的元素的最大限值
-
-14. rbegin()--返回指向集合中最后一个元素的反向迭代器
-
-15. rend()--返回指向集合中第一个元素的反向迭代器
-
-16. size()--集合中元素的数目
-
-17. swap()--交换两个集合变量
-
-18. upper_bound()--返回大于某个值元素的迭代器
-
-19. value_comp()--返回一个用于比较元素间的值的函数
-*/
-
-//各种类型转为字符串: https://blog.csdn.net/chavo0/article/details/51038397
