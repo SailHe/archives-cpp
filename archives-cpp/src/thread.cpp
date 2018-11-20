@@ -29,7 +29,7 @@ void hello(int n, std::string fname){
 	}
 }
 
-int main() {
+int mainForThread() {
 	//初始化构造函数，创建一个 std::thread 对象，该 std::thread 对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数由 args 给出。
 	std::thread t(hello, 5, "");
 	unsigned n = t.hardware_concurrency();

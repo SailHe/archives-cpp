@@ -257,7 +257,8 @@ protected:
 	/*严格查找Key 若没有找到 返回越界值(reflection:反映)*/
 	Value reflection(Key const key){
 		static Value overValue = OverValue();/*索引越界值*/
-		map<Key, Value>::iterator it = strictMap.find(key);
+		//map<Key, Value>::iterator
+		auto it = strictMap.find(key);
 		if (it != strictMap.end())
 			return strictMap[key];
 		else
@@ -637,6 +638,15 @@ int _tmain(int argc, TCHAR* argv[]) {
 int mainForVirtualProtect(){
 	//虚函数拦截
 	_tmain(0, nullptr);
+	return 0;
+}
+
+void overloadFun(std::shared_ptr<int> const &const par) {
+
+}
+
+void overloadFun(std::shared_ptr<int> &const par) {
+
 }
 
 int main(){
@@ -662,7 +672,7 @@ int main(){
 	auto tempvirChild = virChild();
 	v->test(tempvirChild);
 	pA2.reset();/**/
-	/****多态展示****/
+	/****多态展示
 	A1Class *ab1 = new A2Class(1);
 	A1Class *ab2 = new A2Class(1);
 	re = *ab1 < *ab2;
@@ -670,11 +680,12 @@ int main(){
 	A1Class a = A1Class(20);
 	opp(&a, &b);
 	opp(&b, &a);
-	re = a < b;
+	re = a < b;****/
 	//	re = b < a;
 	return 0;
 }
 
+void(*customVisit)(int r, int c) = [](int r, int c){};//nullptr自定义访问
 /*void setCustomVisitFun(void(*customVisitFun)(int r, int c)){
 customVisit = customVisitFun;
 }*/
@@ -682,4 +693,3 @@ template<class Fun>
 void setCustomVisitFun(Fun &customVisitFun){
 	customVisit = customVisitFun;
 }
-void(*customVisit)(int r, int c) = [](int r, int c){};//nullptr自定义访问
