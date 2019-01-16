@@ -21,6 +21,15 @@
     <ClCompile Include="src\thread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\templateDemo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\streamDemo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\inheritDemo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\demo.h">
