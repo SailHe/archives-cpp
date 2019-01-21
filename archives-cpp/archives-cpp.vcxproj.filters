@@ -30,6 +30,9 @@
     <ClCompile Include="src\inheritDemo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\demoForFunctional.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\demo.h">

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\demo.cpp" />
+    <ClCompile Include="src\demoForFunctional.cpp" />
     <ClCompile Include="src\inheritDemo.cpp" />
     <ClCompile Include="src\streamDemo.cpp" />
     <ClCompile Include="src\templateDemo.cpp" />
