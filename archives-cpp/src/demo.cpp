@@ -649,7 +649,7 @@ void overloadFun(std::shared_ptr<int> &const par) {
 
 }
 
-int main(){
+int mainForDemo(){
 	/*
 	ÄÚ´æÐ¹Â©¼ì²âwhile(true){x = new X(); delete x;}
 	tips:

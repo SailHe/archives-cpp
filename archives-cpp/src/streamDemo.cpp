@@ -36,3 +36,19 @@ int mainForRadix() {
 		<< " and 21 as hex gives " << 21 << '\n';
 	return 0;
 }
+
+/*
+文件编程例子
+fprintf(fp, "%s\n", s);
+fprintf(fp, "%d\n", n);
+fgets(ans, 5, fp);
+/// fprintf(fp, (i == 0 ? "%d %d\n" : "%d %d\n"), le, ri); fprintf(fp, "\n"); ///
+
+srand(time(0));
+// 随机输入生成
+// 标程的输入输出
+// 调用标程的到输出
+fp = fopen("sample.in", "w");
+freopen("sample.in", "r", stdin);
+freopen("sample.out", "w", stdout);
+*/
