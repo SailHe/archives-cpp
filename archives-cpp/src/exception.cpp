@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-double division(int a, int b)
-{
+double division(int a, int b){
 	if (b == 0)
 	{
 		throw "Division by zero condition!";
@@ -10,8 +9,7 @@ double division(int a, int b)
 	return (a / b);
 }
 
-int main()
-{
+int mainForExp(){
 	int x = 50;
 	int y = 0;
 	double z = 0;
