@@ -144,6 +144,7 @@
     <ClCompile Include="src\demoForSTL.cpp" />
     <ClCompile Include="src\exception.cpp" />
     <ClCompile Include="src\inheritDemo.cpp" />
+    <ClCompile Include="src\operatorDemo.cpp" />
     <ClCompile Include="src\streamDemo.cpp" />
     <ClCompile Include="src\templateDemo.cpp" />
     <ClCompile Include="src\thread.cpp" />
