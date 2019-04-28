@@ -103,7 +103,7 @@ void demoForStdRedirect() {
 	std::cout << word;  //output to the standard input
 }
 
-int main() {
+int mainForStreamDemo() {
 	demoForStdRedirect();
 	return 0;
 }

@@ -42,6 +42,9 @@
     <ClCompile Include="src\operatorDemo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\regex.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\demo.h">
